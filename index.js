@@ -1,5 +1,5 @@
 module.exports = function waitFor(fn, timeout) {
-    let elapsed = 0;
+    var elapsed = 0;
 
     return new Promise(function(resolve, reject) {
         function recur() {
