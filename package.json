@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix-private/wix-restaurants-web-nodejs"
+    "url": "https://github.com/InterAl/wait-for-cond"
   },
   "keywords": [
     "wait",
