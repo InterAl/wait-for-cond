@@ -4,7 +4,7 @@
   "description": "Returns a promise that resolves when a condition is met, and rejects when hitting a timeout",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/_mocha ./**/*.test.js"
   },
   "repository": {
     "type": "git",

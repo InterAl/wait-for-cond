@@ -1,4 +1,4 @@
-module.exports = function waitFor(fn, timeout) {
+module.exports = function waitFor(fn, timeout, message) {
     var elapsed = 0;
 
     return new Promise(function(resolve, reject) {
@@ -8,7 +8,7 @@ module.exports = function waitFor(fn, timeout) {
             }
 
             if (elapsed > timeout)
-                return reject('timeout');
+                return reject(message || 'timeout');
 
             setTimeout(function () {
                 elapsed += 10;

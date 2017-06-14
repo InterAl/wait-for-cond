@@ -15,7 +15,7 @@ var someCondition = true;
 
 waitFor(function() {
     return someCondition;
-}, 2000)
+}, 2000, 'an optional reject message')
 .then(function() {
     console.log('condition is fulfilled.');
 })
