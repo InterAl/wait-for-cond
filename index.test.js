@@ -44,3 +44,25 @@ describe('wait for', function() {
         });
     });
 });
+
+describe('assert', () => {
+    it('failure', () => {
+        return waitFor.assert(function() {
+            assert(false, 'failed assertion');
+        }, 50).catch(function(err) {
+            assert(err.message === 'failed assertion');
+        });
+    });
+
+    it('success', () => {
+        var met = false;
+
+        setTimeout(function() {
+            met = true;
+        }, 100);
+
+        return waitFor.assert(function() {
+            assert(met, 'assertion should be met in time');
+        }, 200);
+    });
+});

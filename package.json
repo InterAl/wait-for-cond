@@ -4,7 +4,8 @@
   "description": "Returns a promise that resolves when a condition is met, and rejects when hitting a timeout",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/_mocha ./**/*.test.js"
+    "test": "./node_modules/mocha/bin/_mocha ./**/*.test.js",
+    "test:watch": "./node_modules/mocha/bin/_mocha --watch ./**/*.test.js"
   },
   "repository": {
     "type": "git",
