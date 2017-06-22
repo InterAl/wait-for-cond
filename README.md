@@ -7,7 +7,7 @@ $ npm i -S wait-for-cond
 ```
 
 # Usage
-
+The promise resolves if the condition is met at least once in the specified duration, and rejects otherwise.
 ```javascript
 var waitFor = require('wait-for-cond');
 
@@ -24,7 +24,8 @@ waitFor(function() {
 });
 ```
 
-### Support for eventual assertions
+### Eventual assertions
+The promise resolves if the assertion was fulfilled at least once in the specified duration, and rejects otherwise.
 
 ```javascript
 var assert = require('assert');
@@ -40,5 +41,25 @@ waitFor.assert(function() {
 })
 .catch(function() {
     console.log('assertion did not succeed in time.');
+});
+```
+
+### Eventual holding assertions 
+The promise resolves if the assertion remains fulfilled for the entire specified duration, and rejects otherwise.
+
+```javascript
+var assert = require('assert');
+var waitFor = require('wait-for-cond');
+
+var someCondition = true;
+
+waitFor.assertHold(function() {
+    assert(someCondition);
+}, 2000)
+.then(function() {
+    console.log('assertion was held for the entire duration.');
+})
+.catch(function() {
+    console.log('assertion failed in the specified duration.');
 });
 ```

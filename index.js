@@ -34,6 +34,30 @@ waitFor.assert = function(fn, timeout) {
     }, timeout).catch(err => {
         return Promise.reject(lastError);
     });
-}
+};
+
+waitFor.assertHold = function(fn, timeout) {
+    var elapsed = 0;
+
+    return new Promise(function(resolve, reject) {
+        function recur() {
+            try {
+                fn();
+            } catch (err) {
+                return reject(err);
+            }
+
+            if (elapsed > timeout)
+                return resolve();
+
+            setTimeout(function () {
+                elapsed += 10;
+                recur();
+            }, 10);
+        }
+
+        recur();
+    });
+};
 
 module.exports = waitFor;

@@ -39,7 +39,7 @@ describe('wait for', function() {
             return met;
         }, 500, 'custom error message').then(function() {
             throw new Error('promise was resolved, but should have been rejected.');
-        }).catch(function(msg) { 
+        }).catch(function(msg) {
             assert.equal(msg, 'custom error message');
         });
     });
@@ -64,5 +64,29 @@ describe('assert', () => {
         return waitFor.assert(function() {
             assert(met, 'assertion should be met in time');
         }, 200);
+    });
+});
+
+describe('assertHold', () => {
+    it('failure - assertion fails after a while', () => {
+        var met = true;
+
+        setTimeout(function() {
+            met = false;
+        }, 50);
+
+        return waitFor.assertHold(function() {
+            assert(met, 'failed assertion');
+        }, 2000).catch(function(err) {
+            assert(err.message === 'failed assertion');
+        });
+    });
+
+    it('success - assertion holds for the specified duration', () => {
+        var met = true;
+
+        return waitFor.assertHold(function() {
+            assert(met, 'failed assertion');
+        }, 1000);
     });
 });
