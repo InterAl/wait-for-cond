@@ -1,5 +1,5 @@
 # wait-for-cond
-### Wait until a condition is satisfied. Useful for testing.
+Wait until a condition is satisfied. Useful for testing.
 
 # Installation
 ```shell
