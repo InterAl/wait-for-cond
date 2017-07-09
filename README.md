@@ -1,5 +1,5 @@
 # wait-for-cond
-##### Returns a promise that resolves when a condition is met, and rejects when a timeout is hit.
+### Wait until a condition is satisfied. Useful for testing.
 
 # Installation
 ```shell
