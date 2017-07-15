@@ -92,8 +92,8 @@ waitFor.assertHold = function(fn, timeout) {
 function waitPromise(delay) {
     return new Promise(function(resolve, reject) {
         setTimeout(function() {
-            resolve(timeout);
-        }, timeout);
+            resolve(delay);
+        }, delay);
     });
 }
 

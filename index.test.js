@@ -73,6 +73,17 @@ describe('wait for', function() {
                 throw err;
         });
     });
+
+    it('callback returns promise - the promise never returns', function() {
+        return waitFor(function() {
+            return new Promise((resolve, reject) => {});
+        }, 1000).then(function() {
+            throw new Error('promise was resolved, but should have been rejected.');
+        }).catch(function(err) {
+            if (err.message === 'promise was resolved, but should have been rejected.')
+                throw err;
+        });
+    });
 });
 
 describe('assert', () => {
