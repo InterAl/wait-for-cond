@@ -25,7 +25,10 @@ describe('wait for', function() {
             return met;
         }, 500).then(function() {
             throw new Error('promise was resolved, but should have been rejected.');
-        }).catch(function() { });
+        }).catch(function(err) { 
+            if (err !== 'timeout')
+                throw(err);
+        });
     });
 
     it('reject with custom message', function() {
@@ -41,6 +44,33 @@ describe('wait for', function() {
             throw new Error('promise was resolved, but should have been rejected.');
         }).catch(function(msg) {
             assert.equal(msg, 'custom error message');
+        });
+    });
+
+    it('callback returns promise - wait for its completion (true)', () => {
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(function() {
+                resolve(true);
+            }, 50);
+        });
+
+        return waitFor(function() {
+            return promise;
+        }, 1000);
+    });
+
+    it('callback returns promise - wait for its completion (false)', () => {
+        return waitFor(function() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function() {
+                    resolve(false);
+                }, 50);
+            });
+        }, 1000).then(function() {
+            throw new Error('promise was resolved, but should have been rejected.');
+        }).catch(function(err) {
+            if (err.message === 'promise was resolved, but should have been rejected.')
+                throw err;
         });
     });
 });

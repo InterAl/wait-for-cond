@@ -24,6 +24,26 @@ waitFor(function() {
 });
 ```
 
+The condition result can also be wrapped in a promise.
+
+```javascript
+var waitFor = require('wait-for-cond');
+
+var someCondition = true;
+
+waitFor(function() {
+    return new Promise(function(resolve) {
+        return someCondition;
+    });
+}, 2000, 'an optional reject message')
+.then(function() {
+    console.log('condition is fulfilled.');
+})
+.catch(function() {
+    console.error('condition was not fulfilled in time.');
+});
+```
+
 ### Eventual assertions
 The promise resolves if the assertion was fulfilled at least once in the specified duration, and rejects otherwise.
 
