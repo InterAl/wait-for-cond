@@ -33,7 +33,7 @@ var someCondition = true;
 
 waitFor(function() {
     return new Promise(function(resolve) {
-        return someCondition;
+        return resolve(someCondition);
     });
 }, 2000, 'an optional reject message')
 .then(function() {
