@@ -1,6 +1,6 @@
 {
   "name": "wait-for-cond",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Returns a promise that resolves when a condition is met, and rejects when hitting a timeout",
   "main": "index.js",
   "scripts": {
