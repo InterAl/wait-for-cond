@@ -26,7 +26,7 @@ function waitFor(fn, timeout, message) {
 
             const value = fn();
 
-            if (typeof(value && value.then) === 'function') {
+            if (isPromise(value)) {
                 Promise.race([
                     value.then(function(result) {
                         continuation(result);
@@ -46,6 +46,27 @@ function waitFor(fn, timeout, message) {
         }
 
         recur();
+    });
+}
+
+waitFor.hold = function(fn, timeout, message) {
+    return waitFor(function() {
+        const value = fn();
+
+        if (isPromise(value)) {
+            return value.then(function(result) {
+                return !result;
+            });
+        } else {
+            return !value;
+        }
+    }, timeout, message)
+    .then(function() {
+        throw 'did not hold';
+    })
+    .catch(function(err) {
+        if (err === 'did not hold')
+            throw err;
     });
 }
 
@@ -95,6 +116,10 @@ function waitPromise(delay) {
             resolve(delay);
         }, delay);
     });
+}
+
+function isPromise(value) {
+    return typeof(value && value.then) === 'function';
 }
 
 module.exports = waitFor;

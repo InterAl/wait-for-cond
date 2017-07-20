@@ -44,6 +44,26 @@ waitFor(function() {
 });
 ```
 
+waitFor.hold resolves if the condition remains satisfied for the entire duration, and rejects otherwise.
+
+```javascript
+var waitFor = require('wait-for-cond');
+
+var someCondition = true;
+
+waitFor.hold(function() {
+    return new Promise(function(resolve) {
+        return someCondition;
+    });
+}, 2000, 'an optional reject message')
+.then(function() {
+    console.log('condition remained satisfied for 2000ms');
+})
+.catch(function() {
+    console.error('condition was unsatisfied during the 2000ms duration');
+});
+```
+
 ### Eventual assertions
 The promise resolves if the assertion was fulfilled at least once in the specified duration, and rejects otherwise.
 

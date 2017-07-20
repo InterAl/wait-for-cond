@@ -131,3 +131,24 @@ describe('assertHold', () => {
         }, 1000);
     });
 });
+
+describe('waitFor.hold', () => {
+    it('rejects when does not hold', () => {
+        return waitFor.hold(function() {
+            return Promise.resolve(false);
+        }, 5000)
+        .then(function() {
+            throw 'held, but should not have';
+        })
+        .catch(function(err) {
+            if (err === 'held, but should not have')
+                throw 'failure';
+        });
+    });
+
+    it('resolves when holds', () => {
+        return waitFor.hold(function() {
+            return Promise.resolve(true);
+        }, 1000);
+    });
+});
