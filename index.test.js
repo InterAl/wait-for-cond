@@ -151,4 +151,15 @@ describe('waitFor.hold', () => {
             return Promise.resolve(true);
         }, 1000);
     });
+
+    it('exception should reject', () => {
+        return waitFor.hold(function() {
+            throw 'foo';
+        }, 1000).then(function() {
+            throw 'should have rejected'
+        }).catch(function(err) {
+            if (err === 'should have rejected')
+                throw err;
+        });
+    });
 });

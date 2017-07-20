@@ -67,6 +67,9 @@ waitFor.hold = function(fn, timeout, message) {
     .catch(function(err) {
         if (err === 'did not hold')
             throw err;
+
+        if (err !== 'timeout')
+            throw err;
     });
 }
 
