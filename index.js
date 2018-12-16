@@ -78,8 +78,13 @@ waitFor.assert = function(fn, timeout) {
 
     return waitFor(function() {
         try {
-            fn();
-            return true;
+            var result = fn();
+
+            if (isPromise(result)) {
+                return Promise.resolve(result);
+            } else {
+                return true;
+            }
         } catch (e) {
             lastError = e;
             return false;

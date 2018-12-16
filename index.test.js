@@ -74,6 +74,19 @@ describe('wait for', function() {
         });
     });
 
+    it('callback returns promise - always throws', () => {
+        return waitFor.assert(function() {
+            return new Promise(resolve => {
+                assert(false);
+            });
+        }, 1000).then(function() {
+            throw new Error('promise was resolved, but should have been rejected.');
+        }).catch(function(err) {
+            if (err && err.message === 'promise was resolved, but should have been rejected.')
+                throw err;
+        });
+    });
+
     it('callback returns promise - the promise never returns', function() {
         return waitFor(function() {
             return new Promise((resolve, reject) => {});
