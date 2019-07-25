@@ -8,7 +8,7 @@ function waitFor(fn, timeout, message) {
 
         function continuation(result) {
             if (result) {
-                return resolve();
+                return resolve(result);
             }
 
             if (elapsed > timeout) {

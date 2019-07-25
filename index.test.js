@@ -14,6 +14,20 @@ describe('wait for', function() {
         }, 1000);
     });
 
+    it('resolve with the result', () => {
+        var met = false;
+
+        setTimeout(function() {
+            met = {foo: 'bar'};
+        }, 50);
+
+        return waitFor(function() {
+            return met;
+        }, 1000).then(function(result) {
+            assert(result.foo === 'bar');
+        });
+    });
+
     it('reject when the timeout is reached', function() {
         var met = false;
 
