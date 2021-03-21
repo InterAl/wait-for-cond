@@ -133,6 +133,21 @@ describe('assert', () => {
             assert(met, 'assertion should be met in time');
         }, 200);
     });
+
+    it('success with a promise that returns undefined', () => {
+        var met = false;
+
+        setTimeout(function() {
+            met = true;
+        }, 100);
+
+        return waitFor.assert(function() {
+            return new Promise(function(resolve) {
+                assert(met, 'assertion should be met in time');
+                resolve();
+            });
+        }, 200);
+    });
 });
 
 describe('assertHold', () => {

@@ -81,7 +81,9 @@ waitFor.assert = function(fn, timeout) {
             var result = fn();
 
             if (isPromise(result)) {
-                return Promise.resolve(result);
+                return Promise.resolve(result).then(function() {
+                    return true;
+                });
             } else {
                 return true;
             }
